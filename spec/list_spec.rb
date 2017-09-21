@@ -68,4 +68,27 @@ describe(List) do
       expect(list1).to(eq(list2))
     end
   end
+
+  describe("#delete") do
+    it("lets you delete a list from the database") do
+      list = List.new({:name => "Epicodus stuff", :id => nil})
+      list.save
+      list2 = List.new({:name => "House stuff", :id => nil})
+      list2.save
+      list.delete
+      expect(List.all).to(eq([list2]))
+    end
+  end
+
+  describe("#delete") do
+    it("lets you delete tasks from the database") do
+      list = List.new({:name => "Epicodus stuff", :id => nil})
+      list.save
+      task = Task.new({:description => "learn SQL", :list_id => list.id})
+      task2 = Task.new({:description => "House stuff", :list_id => list.id})
+      task2.save
+      list.delete
+      expect(Task.all).to(eq([]))
+    end
+  end
 end
